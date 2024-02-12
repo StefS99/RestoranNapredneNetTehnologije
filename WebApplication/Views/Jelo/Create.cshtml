@@ -1,0 +1,99 @@
+﻿@model WebApplication.Models.JeloViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<br />
+<br />
+<section>
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+            <p>Unesite novo jelo</p>
+        </div>
+        <br />
+        <form method="post" enctype="multipart/form-data" action="Create">
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=TipJela></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=TipJela class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=TipJela class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <label asp-for="Slika"></label>
+                </div>
+                <div class="col-4">
+                    <input type="file" name="files" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=Naziv></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=Naziv class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=Naziv class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=OpisJela></label>
+                </div>
+
+                <div class="col-4">
+                    <input asp-for=OpisJela class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=OpisJela class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=CenaJela></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=CenaJela class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=CenaJela class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Kuvari">Kuvari</label>
+                </div>
+                <div class="col-4">
+                    <select asp-for="KuvarId" asp-items="@Model.Kuvari" class="form-control"> </select>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6); margin-left: 0px;" value="Dodajte jelo" />
+            </div>
+
+        </form>
+
+        <div>
+            <a asp-action="Index">Vratite se na jelovnik</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

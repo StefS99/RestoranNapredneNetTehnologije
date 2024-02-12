@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Domain
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+
+<ul>
+    @if (SignInManager.IsSignedIn(User))
+    {
+
+        <li>
+
+            <a>Zdravo, @UserManager.GetUserAsync(User).Result.Ime @UserManager.GetUserAsync(User).Result.Prezime! </a> <!--UserManager.GetUserName(User)!-->
+        </li>
+        <li>
+            <a href="/Auth/Logout">Odjava</a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a href="/Auth/Login">Prijava</a>
+        </li>
+    }
+</ul>

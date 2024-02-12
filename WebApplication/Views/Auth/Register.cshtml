@@ -1,0 +1,67 @@
+﻿@model WebApplication.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<br />
+<br />
+<br />
+
+<section>
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Registracija</h2>
+            <p>Registrujte se</p>
+        </div>
+
+        <h3>Unesite podatke za registraciju</h3>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Ime" class="control-label"></label>
+                        <input asp-for="Ime" class="form-control" />
+                        <span asp-validation-for="Ime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prezime" class="control-label"></label>
+                        <input asp-for="Prezime" class="form-control" />
+                        <span asp-validation-for="Prezime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PasswordProvera" class="control-label"></label>
+                        <input asp-for="PasswordProvera" class="form-control" type="password" />
+                        <span asp-validation-for="PasswordProvera" class="text-danger"></span>
+                    </div>
+                    <!--<div class="form-group">
+                        <label asp-for="Admin"></label>
+                        <input asp-for="Admin" class="form-control" type="checkbox" />
+                    </div>-->
+                    <br />
+                    <div class="form-group">
+                        <input class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6); margin-left: 0px;" type="submit" value="Registrujte se" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

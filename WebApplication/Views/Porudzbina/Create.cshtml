@@ -1,0 +1,163 @@
+﻿@model WebApplication.Models.PorudzbinaViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<br />
+<br />
+
+<section>
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <p>Unesite novu porudžbinu</p>
+        </div>
+        <br />
+        <form method="post" id="form" enctype="multipart/form-data" asp-action="Create">
+            <input hidden asp-for="PorudzbinaId" />
+            <input hidden asp-for="Slika" />
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=Naziv></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=Naziv class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=Naziv class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <label asp-for=Adresa></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=Adresa class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=Adresa class="text-danger"></span>
+                    </div>
+                </div>
+                <!--<div class="col-auto">
+                    <label asp-for="Slika"></label>
+                </div>
+                <div class="col-4">
+                    <input type="file" name="files" class="form-control" />
+                </div>-->
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=Datum></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=Datum class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=Datum class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=Adresa></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=Adresa class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=Adresa class="text-danger"></span>
+                    </div>
+                </div>
+            </div>-->
+
+            <br/>
+
+            <div class="form-group row">
+                <div style="color: white;" class="col-2">
+                    <label>Jela</label>
+                </div>
+                <div class="col-9">
+
+                    <table class="table table-stripped">
+                        <tr style="color: white;">
+                            <th>Jela u porudžbini</th>
+                            <th>Premesti</th>
+                            <th>Sva jela</th>
+                        </tr>
+                        <tr>
+                            <td class="col-md-5">
+                                <select id="listbox1" multiple="multiple" class="table" asp-for="@Model.NovoJeloUPorudzbini" asp-items="@Model.Jela">
+                                </select>
+                            </td>
+                            <td class="col-md-2">
+                                <input type="button" id="but1" value=">>" />
+                                <input type="button" id="but2" value="<<" />
+                            </td>
+
+                            <td class="col-md-5">
+                                <select id="listbox2" multiple="multiple" class="table" asp-items="@Model.OstalaJela">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="color: white">
+                                    Troškovi dostave iznose 300 dinara.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6); margin-left: 0px;" value="Zapamtite porudžbinu" />
+            </div>
+
+        </form>
+
+        <div>
+            <a asp-action="Index">Vratite se na listu Vaših porudžbina</a>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+    <script>
+        $(function () {
+            $("#but1").click(function () {
+                $("#listbox1 option:selected").each(function () {
+                    $(this).remove().appendTo("#listbox2");
+                });
+            });
+            $("#but2").click(function () {
+                $("#listbox2 option:selected").each(function () {
+                    $(this).remove().appendTo("#listbox1");
+                });
+            });
+        });
+
+
+
+
+        //funkcija za selektovanje svih zivotinja koje ostaju u paketu, nakon submita
+        var form = document.getElementById('form');
+        form.addEventListener('submit', function (event) {
+            options = document.getElementById('listbox1');
+            for (i = 0; i < options.length; i++) {
+                options[i].selected = "true";
+            }
+        });
+
+
+    </script>
+

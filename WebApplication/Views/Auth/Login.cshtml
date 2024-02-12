@@ -1,0 +1,71 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<br />
+<br />
+<br />
+
+<section>
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Prijava</h2>
+            <p>Prijavite se</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Login" data-aos="fade-up" data-aos-delay="100">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6); margin-left: 0px;" type="submit" value="Prijavite se" />
+                    </div>
+                    <div class="link-info">
+                        <a href="/Auth/Register">Nemate nalog? Registrujte se</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--
+        <form asp-action="Login" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 form-group">
+                    <input asp-for="Username" name="username" class="form-control" id="username" placeholder="Korisničko ime" data-rule="minlen:4" data-msg="Molimo Vas da unestete bar 4 karaktera">
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 form-group mt-3">
+                <input asp-for="Password" name="password" class="form-control" id="password" placeholder="Lozinka" data-rule="minlen:4" data-msg="Molimo Vas da unestete bar 4 karaktera">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <div><button type="submit">Login</button></div>
+            </div>
+            <div class="link-info col-lg-4 col-md-6">
+                <a href="/Auth/Register">Register</a>
+            </div>
+        </form>  -->
+
+    </div>
+</section><!-- End Book A Table Section -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

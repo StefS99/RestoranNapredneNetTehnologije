@@ -1,0 +1,91 @@
+﻿@model WebApplication.Models.KuvarViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<br />
+
+<br />
+<br />
+<br />
+<section>
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+            <p>Unesite novog kuvara</p>
+        </div>
+
+        <br />
+        <form method="post" enctype="multipart/form-data" action="Create">
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=KuvarIme></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=KuvarIme class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=KuvarIme class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <label asp-for="Slika"></label>
+                </div>
+                <div class="col-4">
+                    <input type="file" name="files" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=KuvarPrezime></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=KuvarPrezime class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=KuvarPrezime class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=DatumRodjenja></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=DatumRodjenja class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=DatumRodjenja class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=Specijalnost></label>
+                </div>
+
+                <div class="col-4">
+                    <input asp-for=Specijalnost class="form-control" />
+                    <div class="form-group row-cols-auto">
+                        <span asp-validation-for=Specijalnost class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <br />
+            <div class="form-group">
+                <input type="submit" class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6); margin-left: 0px;" value="Dodajte kuvara" />
+            </div>
+
+        </form>
+
+        <div>
+            <a asp-action="Index">Vratite se na listu kuvara</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

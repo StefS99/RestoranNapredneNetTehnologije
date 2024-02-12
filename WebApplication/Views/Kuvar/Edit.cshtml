@@ -1,0 +1,123 @@
+﻿@model WebApplication.Models.KuvarViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<br />
+<br />
+
+<section>
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <p>Izmenite podatke o kuvaru</p>
+        </div>
+        <br />
+
+        <form method="post" enctype="multipart/form-data" asp-action="Edit">
+            <input hidden asp-for="KuvarId" />
+            <input hidden asp-for="Slika" />
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=KuvarIme></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=KuvarIme class="form-control" />
+                </div>
+                <div class="col-auto">
+                    <label asp-for="Slika"></label>
+                </div>
+                <div class="col-4">
+                    <input type="file" name="files" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=KuvarPrezime></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=KuvarPrezime class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=DatumRodjenja></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=DatumRodjenja class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for=Specijalnost></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for=Specijalnost class="form-control" />
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6); margin-left: 0px;" type="submit" value="Ažurirajte kuvara" />
+            </div>
+
+        </form>
+
+        <div>
+            <a asp-action="Index">Vratite se na listu kuvara</a>
+        </div>
+
+    </div>
+</section>
+
+<!--<section id="book-a-table" class="book-a-table">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Reservation</h2>
+            <p>Book a Table</p>
+        </div>
+            <form method="post" enctype="multipart/form-data" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100" asp-action="Edit">
+            <input hidden asp-for="KuvarId" />
+            <input hidden asp-for="Slika" />
+            <div class="row">
+                <div class="col-lg-4 col-md-6 form-group">
+                    <input asp-for=Specijalnost type ="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                    <div class="validate"></div>
+                </div>
+                <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                    <input asp-for=KuvarIme type="text" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+                    <div class="validate"></div>
+                </div>
+                <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                    <input asp-for=KuvarPrezime class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                    <div class="validate"></div>
+                </div>
+                <div class="col-lg-4 col-md-6 form-group mt-3">
+                    <input asp-for=DatumRodjenja type="text" name="date" class="form-control" id="date" placeholder="Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                    <div class="validate"></div>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="file" name="files" class="form-control" />
+                </div>
+            </div>
+            <div class="text-center"><button type="submit">Book a Table</button></div>
+        </form>
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Update" />
+            <a asp-action="Index" class="btn btn-success">Nazad</a>
+        </div>
+    </div>
+</section>--><!-- End Book A Table Section -->
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

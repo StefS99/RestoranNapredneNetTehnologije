@@ -1,0 +1,161 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<JeloViewModel>
+@using WebApplication.Helpers
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["Controller"] = "Jelo";
+    ViewData["Action"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+
+
+<section id="menu" class="menu section-bg">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Jelovnik</h2>
+            <p>Jelovnik</p>
+        </div>
+        <br/>
+        <div style="display: flex; justify-content: space-between;">
+            <form asp-action="Index" method="get">
+                <div class="col-4">
+                    <p>
+                        <input type="text" name="searchString" value="@ViewBag.CurrentFilter" />
+                        <input type="submit" value="Pretražite jelo" class="book-a-table-btn scrollto d-none d-lg-flex" 
+                               style="background: rgba(12, 11, 9, 0.6); margin-left: 0px;" />
+                        <a asp-action="Index">Uklonite filtere</a>
+                    </p>
+                </div>
+            </form>
+                
+            <div class="col-4">
+                <p>
+                    @if (User.IsInRole(Roles.Admin))
+                    {
+                        <div class="col-6 text-right">
+                            <a class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6);" asp-action="Create"> Dodajte novo jelo</a>
+                        </div>
+
+                    }
+                </p>
+            </div>          
+        </div>
+        <!--<table>
+            <tr>
+                <td>
+                    <form asp-action="Index" method="get">
+                        <div class="col-2">
+                            <p>
+                                Pronađite Jelo: <input type="text" name="searchString" value="@ViewBag.CurrentFilter" />
+                                <input type="submit" value="Search" class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6);" />
+                                <a asp-action="Index">Uklonite filtere</a>
+                            </p>
+                        </div>
+                    </form>
+                </td>
+                <td style="width:100%">
+                    <div class="col-4">
+                        <p>
+                            @if (User.IsInRole(Roles.Admin))
+                            {
+                                <div class="col-6 text-right">
+                                    <a class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6);" asp-action="Create"> Dodajte novo jelo</a>
+                                </div>
+
+                            }
+                        </p>
+                    </div>
+                </td>
+                
+            </tr>
+            
+        </table>-->
+            
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <ul id="menu-flters">
+                    <li data-filter="*" class="filter-active">Sva jela</li>
+                    <li data-filter=".filter-starters">Predjela</li>
+                    <li data-filter=".filter-main">Glavna jela</li>
+                    <li data-filter=".filter-salads">Salate</li>
+                    <li data-filter=".filter-specialty">Slatki specijaliteti</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+
+            @foreach (var item in Model.Data)
+            {
+                string Kategorija = "filter-starters";
+
+                @switch (item.TipJela)
+                {
+                    case "Predjela":
+                        Kategorija = "filter-starters";
+                        break;
+                    case "Glavna jela":
+                        Kategorija = "filter-main";
+                        break;
+                    case "Salate":
+                        Kategorija = "filter-salads";
+                        break;
+                    case "Slatki specijaliteti":
+                        Kategorija = "filter-specialty";
+                        break;
+                    default:
+                        Kategorija = "filter-starters";
+                        break;
+ 
+                }
+
+                <div class="col-lg-6 menu-item @Kategorija">
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewBag.TipJelaParam"
+                       asp-route-pageNumber="@Model.PageNumber">@item.TipJela</a>
+
+                    @if (String.IsNullOrEmpty(item.Slika))
+                    {
+                        <img class="menu-img" src="@Url.Content("/"+"assets\\img\\menu\\bread-barrel.jpg")" alt="" />
+                    }
+                    else
+                    {
+                        <img class="menu-img" src="@Url.Content("/"+item.Slika)" alt="" />
+                    }
+                    <div class="menu-content">
+                        <a href="#">@item.Naziv</a><span>@item.CenaJela din</span>
+                    </div>
+                    
+                    <div class="menu-ingredients">
+                        @item.OpisJela
+                        <h6><i calss="bi bi-geo-alt">Kuvar: @item.KuvarIme</i></h6>
+                    </div>
+
+                    <div>
+                        @if (User.IsInRole(Roles.Admin))
+                        {
+                            <div class="btn-group">
+                                <a type="button" class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6);" href="/Jelo/Edit/@item.JeloId">
+                                <i class="fa-solid fa-pen-to-square"></i></a>
+                                <form method="post" action="Delete">
+                                    <button onclick="if (!confirm('Da li ste sigurni da želite da obrišete jelo?')){return false}" type="submit" 
+                                    class="book-a-table-btn scrollto d-none d-lg-flex" style="background: rgba(12, 11, 9, 0.6);" asp-action="Delete" asp-route-id="@item.JeloId">
+                                    <i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+        <br />
+        <partial name="_PaginationPartial" model="Model" view-data="ViewData" />
+    </div>
+</section>
